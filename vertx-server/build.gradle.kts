@@ -12,7 +12,6 @@ dependencies {
     implementation("io.vertx:vertx-grpc-server:$vertxVersion")
     implementation("io.vertx:vertx-grpcio-server:$vertxVersion")
     implementation("io.vertx:vertx-launcher-application:$vertxVersion")
-//    implementation("org.checkerframework:checker-qual:3.49.5")
 }
 
 application {
