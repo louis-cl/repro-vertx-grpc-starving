@@ -11,6 +11,7 @@ val protobufVersion = "4.31.1"
 dependencies {
     api("com.google.protobuf:protobuf-java:${protobufVersion}")
     api("io.grpc:grpc-stub:${grpcVersion}")
+    api("io.grpc:grpc-netty:${grpcVersion}")
     api("io.grpc:grpc-protobuf:${grpcVersion}")
     implementation("io.grpc:grpc-netty-shaded:${grpcVersion}")
 }

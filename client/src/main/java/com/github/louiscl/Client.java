@@ -6,6 +6,8 @@ import com.github.louiscl.grpc.Response;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -16,18 +18,22 @@ public class Client {
     private static final Logger logger = Logger.getLogger(Client.class.getName());
 
     public static void main(String[] args) throws InterruptedException {
-        var channel = ManagedChannelBuilder.forAddress("localhost", 8080)
+        int n = Integer.parseInt(args[0]);
+        logger.log(Level.INFO, "Client will send " + n + " messages per call");
+        var channel = ManagedChannelBuilder.forAddress("localhost", ServerConfiguration.PORT)
                 .usePlaintext()
                 .build();
 
         var stub = ProducerServiceGrpc.newStub(channel);
+        var start = Instant.now();
         for (int i = 0; i < 3; i++) {
             try {
-                streaming(stub, 60);
+                streaming(stub, n);
             } catch (RuntimeException e) {
                 logger.log(Level.SEVERE, "Error during call", e);
             }
         }
+        logger.info("Calls took " + Duration.between(start, Instant.now()).toMillis() + " ms");
         logger.info("Shutting down");
         channel.shutdownNow();
     }
@@ -53,8 +59,8 @@ public class Client {
             }
         });
 
-        var req = Request.newBuilder().setName("msg-1234".repeat(100)).build();
-        logger.info("Each message is " + req.getSerializedSize() + " bytes");  // 1000 bytes
+        var req = Request.newBuilder().setName("1234567890").build();
+        logger.info("Each message is " + req.getSerializedSize() + " bytes");  // 12 bytes
         try {
             for (int i = 0; i < messages; i++) {
                 requestObserver.onNext(req);

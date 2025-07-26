@@ -7,10 +7,10 @@ import io.vertx.grpcio.server.GrpcIoServiceBridge;
 import io.vertx.launcher.application.VertxApplication;
 
 // Adapted from https://github.com/vert-x3/vertx-examples/blob/a7c89ef3dda39edec77680dfb885e62e7ac81edc/grpc-examples/src/main/java/io/vertx/example/grpc/producer/Server.java
-public class Server extends VerticleBase {
+public class VertxServer extends VerticleBase {
 
     public static void main(String[] args) {
-        VertxApplication.main(new String[]{Server.class.getName()});
+        VertxApplication.main(new String[]{VertxServer.class.getName()});
     }
 
     @Override
@@ -20,6 +20,6 @@ public class Server extends VerticleBase {
         rpcServer.addService(GrpcIoServiceBridge.bridge(new GrpcService()));
 
         // start the server
-        return vertx.createHttpServer().requestHandler(rpcServer).listen(8080);
+        return vertx.createHttpServer().requestHandler(rpcServer).listen(ServerConfiguration.PORT);
     }
 }

@@ -16,6 +16,6 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.github.louiscl.Server")
+    mainClass.set("com.github.louiscl.VertxServer")
     applicationDefaultJvmArgs = listOf("-Djava.util.logging.config.file=src/main/resources/logging.properties")
 }
