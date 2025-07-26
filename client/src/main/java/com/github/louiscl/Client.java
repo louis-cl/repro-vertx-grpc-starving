@@ -4,10 +4,8 @@ import com.github.louiscl.grpc.ProducerServiceGrpc;
 import com.github.louiscl.grpc.Request;
 import com.github.louiscl.grpc.Response;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
-import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -25,7 +23,7 @@ public class Client {
         var stub = ProducerServiceGrpc.newStub(channel);
         for (int i = 0; i < 3; i++) {
             try {
-                streaming(stub, 6000);
+                streaming(stub, 60);
             } catch (RuntimeException e) {
                 logger.log(Level.SEVERE, "Error during call", e);
             }
@@ -55,8 +53,8 @@ public class Client {
             }
         });
 
-        var req = Request.newBuilder().setName("msg-1234").build();
-        logger.info("Each message is " + req.getSerializedSize() + " bytes");
+        var req = Request.newBuilder().setName("msg-1234".repeat(100)).build();
+        logger.info("Each message is " + req.getSerializedSize() + " bytes");  // 1000 bytes
         try {
             for (int i = 0; i < messages; i++) {
                 requestObserver.onNext(req);
