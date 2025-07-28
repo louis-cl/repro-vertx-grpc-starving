@@ -1,3 +1,14 @@
+# TLDR;
+Run
+```shell
+./gradlew :vertx-server:run
+```
+and
+```shell
+./gradlew :client:run
+```
+Client takes >20s to complete.
+
 # Commands
 Start grpc server
 ```shell
