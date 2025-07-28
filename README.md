@@ -5,7 +5,7 @@ Run
 ```
 and
 ```shell
-./gradlew :client:run
+./gradlew :client:run --args="6000"
 ```
 Client takes >20s to complete.
 
