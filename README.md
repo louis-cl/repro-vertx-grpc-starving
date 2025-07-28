@@ -1,4 +1,4 @@
-# TLDR;
+# TL;DR
 Run
 ```shell
 ./gradlew :vertx-server:run
@@ -60,7 +60,7 @@ All 3 calls take 201ms
 Vertx server behaves the same minus some PING frames.
 
 ## Filling window scenario
-N=6000, with at least 12 bytes per message, this doesn't fit in the default http2 windows
+N=6000: with at least 12 bytes per message, this doesn't fit in the default http2 windows
 ```shell
 ./gradlew :client:run --args="6000"
 ```
@@ -70,7 +70,7 @@ N=6000, with at least 12 bytes per message, this doesn't fit in the default http
 2. Client sends request headers, multiple data frames
 3. Server sends response headers FAILED_PRECONDITION and half closes
 4. Client observer notices FAILED_PRECONDITION and latches, next request can start.
-5. Server sends window updates for the connection and updates it's settings to have a bigger initial window.
+5. Server sends window updates for the connection and updates its settings to have a bigger initial window.
 6. Client sends data for the first request and half closes. First stream is closed.
 7. New request starts.
 
