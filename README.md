@@ -20,6 +20,12 @@ Start vertx server
 ./gradlew :vertx-server:run
 ```
 
+Start vertx native server
+```shell
+./gradlew :vertx-native-server:run
+```
+
+
 Start client
 ```shell
 ./gradlew :client:run
