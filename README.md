@@ -1,34 +1,40 @@
+# Setup (First Time Only)
+Build the project and install all dependencies:
+```shell
+mvn clean install
+```
+
 # TL;DR
 Run
 ```shell
-./gradlew :vertx-server:run
+mvn -pl vertx-server exec:java
 ```
 and
 ```shell
-./gradlew :client:run --args="6000"
+mvn -pl client exec:java -Dexec.args="6000"
 ```
 Client takes >20s to complete.
 
 # Commands
 Start grpc server
 ```shell
-./gradlew :grpc-server:run
+mvn -pl grpc-server exec:java
 ```
 
 Start vertx server
 ```shell
-./gradlew :vertx-server:run
+mvn -pl vertx-server exec:java
 ```
 
 Start vertx native server
 ```shell
-./gradlew :vertx-native-server:run
+mvn -pl vertx-native-server exec:java
 ```
 
 
 Start client
 ```shell
-./gradlew :client:run
+mvn -pl client exec:java
 ```
 
 
@@ -49,7 +55,7 @@ Client will log the time to complete all rpc calls ignoring channel, stub setup 
 ## Simple scenario
 N=10, everything fits in a window and client can end before server
 ```shell
-./gradlew :client:run --args="10"
+mvn -pl client exec:java -Dexec.args="10"
 ```
 ### Grpc server
 
@@ -68,7 +74,7 @@ Vertx server behaves the same minus some PING frames.
 ## Filling window scenario
 N=6000: with at least 12 bytes per message, this doesn't fit in the default http2 windows
 ```shell
-./gradlew :client:run --args="6000"
+mvn -pl client exec:java -Dexec.args="6000"
 ```
 ### Grpc server
 
